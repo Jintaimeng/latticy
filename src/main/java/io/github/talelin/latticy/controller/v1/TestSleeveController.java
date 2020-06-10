@@ -14,6 +14,7 @@ import java.util.List;
 public class TestSleeveController {
     @Autowired
     private TestSleeveService testSleeveService;
+
     @GetMapping("/test1")
     public List<BannerDO> test1(){
         return this.testSleeveService.getBanners();

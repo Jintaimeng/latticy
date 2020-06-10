@@ -15,6 +15,9 @@ public class TestSleeveService {
     public List<BannerDO> getBanners(){
         return this.bannerMapper.getAllBanners();
     }
+    public List<BannerDO> getBanners1(){
+        return this.bannerMapper.getAllBanners1();
+    }
     public long insertBanner(){
         BannerDO bannerDO = new BannerDO();
         bannerDO.setName("NewBanner");
