@@ -6,6 +6,7 @@ import io.github.talelin.latticy.common.mybatis.Page;
 import io.github.talelin.latticy.dto.BannerDTO;
 import io.github.talelin.latticy.model.BannerDO;
 import io.github.talelin.latticy.service.BannerService;
+import io.github.talelin.latticy.vo.DeletedVO;
 import io.github.talelin.latticy.vo.PageResponseVO;
 import io.github.talelin.latticy.vo.UpdatedVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,11 @@ public class BannerController {
         return new UpdatedVO();
     }
 
+    @DeleteMapping("/{id}")
+    public DeletedVO delete(@PathVariable @Positive Long id){
+        this.bannerService.delete(id);
+        return new DeletedVO();
+    }
     @GetMapping("/page")
     public PageResponseVO<BannerDO> getBanners(@RequestParam(required = false, defaultValue = "0")
                            @Min(value = 0) Integer page,

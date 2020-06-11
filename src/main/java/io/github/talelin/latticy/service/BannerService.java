@@ -18,4 +18,11 @@ public class BannerService extends ServiceImpl<BannerMapper, BannerDO> {
         BeanUtils.copyProperties(bannerDTO, bannerDO);
         this.updateById(bannerDO);
     }
+    public void delete(Long id){
+        BannerDO bannerDO = this.getById(id);
+        if(bannerDO == null){
+            throw new NotFoundException(20000);
+        }
+        this.getBaseMapper().deleteById(id);
+    }
 }
