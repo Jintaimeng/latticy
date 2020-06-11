@@ -2,6 +2,7 @@ package io.github.talelin.latticy.controller.v1;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import io.github.talelin.autoconfigure.response.Updated;
+import io.github.talelin.latticy.bo.BannerWithItemsBO;
 import io.github.talelin.latticy.common.mybatis.Page;
 import io.github.talelin.latticy.dto.BannerDTO;
 import io.github.talelin.latticy.model.BannerDO;
@@ -36,6 +37,11 @@ public class BannerController {
         this.bannerService.delete(id);
         return new DeletedVO();
     }
+    @GetMapping("/{id}")
+    public BannerWithItemsBO getWithItems(@PathVariable @Positive Long id){
+        return this.bannerService.getWithItems(id);
+    }
+
     @GetMapping("/page")
     public PageResponseVO<BannerDO> getBanners(@RequestParam(required = false, defaultValue = "0")
                            @Min(value = 0) Integer page,
