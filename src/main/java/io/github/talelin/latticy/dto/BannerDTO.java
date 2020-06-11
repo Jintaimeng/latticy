@@ -12,11 +12,11 @@ public class BannerDTO {
     @NotBlank
     @Length(min=2, max=20)
     private String name;
-//    @Length(min=2, max=30)
-//    private String description;
-//    @Length(min=2, max=256)
-//    private String title;
-//    @NotBlank
-//    @Length(min=2, max=256)
-//    private String img;
+    @Length(min=2, max=30)
+    private String description;
+    @Length(min=2, max=256)
+    private String title;
+    @NotBlank
+    @Length(min=2, max=256)
+    private String img;
 }
