@@ -34,6 +34,8 @@ public class BannerService extends ServiceImpl<BannerMapper, BannerDO> {
             throw new NotFoundException(20000);
         }
         this.getBaseMapper().deleteById(id);
+        //级联删除 banner_item :
+        //this.getBaseMapper().deleteBatchIds()
     }
     public BannerWithItemsBO getWithItems(Long id){
         BannerDO bannerDO = this.getById(id);
