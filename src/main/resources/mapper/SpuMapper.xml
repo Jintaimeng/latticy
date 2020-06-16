@@ -32,6 +32,11 @@
                 <arg column="spu_img"/>
             </constructor>
         </collection>
+        <collection property="spuDetailImgList" ofType="java.lang.String">
+            <constructor>
+                <arg column="detail_img"/>
+            </constructor>
+        </collection>
     </resultMap>
 
     <select id="getDetail" resultMap="DetailResultMap">
@@ -39,12 +44,14 @@
                 sku.title as default_sku_title,
                 c.name as category_name,
                 sk.name as sketch_spec_key_name,
-                si.img as spu_img
+                si.img as spu_img,
+                sdi.img as detail_img
         from spu s
         join sku on sku.id = s.default_sku_id
         join category c on c.id = s.category_id
         join spec_key sk on sk.id = s.sketch_spec_id
         join spu_img si on si.spu_id = s.id
+        join spu_detail_img sdi on sdi.spu_id = s.id
         where s.id = #{id} and s.delete_time is NULL;
     </select>
 
