@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.github.talelin.latticy.mapper.SpuMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="io.github.talelin.latticy.model.SpuDO">
+        <id column="id" property="id" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="delete_time" property="deleteTime" />
+        <result column="title" property="title" />
+        <result column="subtitle" property="subtitle" />
+        <result column="category_id" property="categoryId" />
+        <result column="root_category_id" property="rootCategoryId" />
+        <result column="online" property="online" />
+        <result column="price" property="price" />
+        <result column="sketch_spec_id" property="sketchSpecId" />
+        <result column="default_sku_id" property="defaultSkuId" />
+        <result column="img" property="img" />
+        <result column="discount_price" property="discountPrice" />
+        <result column="description" property="description" />
+        <result column="tags" property="tags" />
+        <result column="is_test" property="isTest" />
+        <result column="spu_theme_img" property="spuThemeImg" />
+        <result column="for_theme_img" property="forThemeImg" />
+    </resultMap>
+    
+    <resultMap autoMapping="true" id="DetailResultMap" type="io.github.talelin.latticy.model.SpuDetailDO">
+        <id column="id" property="id" />
+        <collection property="spuImgList" ofType="java.lang.String">
+            <constructor>
+                <arg column="spu_img"/>
+            </constructor>
+        </collection>
+    </resultMap>
+
+    <select id="getDetail" resultMap="DetailResultMap">
+        select s.*,
+                sku.title as default_sku_title,
+                c.name as category_name,
+                sk.name as sketch_spec_key_name,
+                si.img as spu_img
+        from spu s
+        join sku on sku.id = s.default_sku_id
+        join category c on c.id = s.category_id
+        join spec_key sk on sk.id = s.sketch_spec_id
+        join spu_img si on si.spu_id = s.id
+        where s.id = #{id} and s.delete_time is NULL;
+    </select>
+
+</mapper>
